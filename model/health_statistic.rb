@@ -9,5 +9,4 @@ class HealthStatistic
     @sex = args.fetch("sex", "")
     @count = args.fetch("count", "").to_i
   end
-
 end
