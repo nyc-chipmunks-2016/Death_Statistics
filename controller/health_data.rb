@@ -5,21 +5,23 @@ class HealthData
     @health_data = Parser.parse
   end
 
-  def select_by_year
+  def run
+    filter = []
+    View.interface_intro
+    while filter.empty?
+      user_gender = gender
+      user_race = race
+      user_year = year
+      filter = health_data.select do |stat|
+        stat.sex == user_gender && stat.ethnicity == user_race && stat.year == user_year
+      end
+      View.invalid_input if filter.empty?
+    end
+    View.display(sort_list(filter), user_gender, user_race, user_year)
   end
 
-  def run
-    user_gender = gender
-    user_race = race
-    filter = health_data.select do |stat|
-      stat.sex == user_gender && stat.ethnicity == user_race && stat.year == 2011
-    end
-
-    View.display(filter)
-
-    # binding.pry
-    p 'test'
-
+  def sort_list(data)
+    data.sort { |stat_a, stat_b| stat_b.count <=> stat_a.count }
   end
 
   def race
@@ -28,6 +30,10 @@ class HealthData
 
   def gender
     View.gender
+  end
+
+  def year
+    View.year
   end
 
 end

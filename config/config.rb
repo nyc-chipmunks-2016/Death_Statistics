@@ -1,0 +1,8 @@
+require_relative '../model/health_statistic'
+require_relative '../controller/health_data'
+require_relative '../controller/parser'
+require_relative '../view/view'
+require 'open-uri'
+require 'json'
+require 'colorize'
+require 'rainbow'
